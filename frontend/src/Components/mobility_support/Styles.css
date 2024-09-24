@@ -1,0 +1,8 @@
+body {
+    background-color: #9BA4BF;
+}
+
+button {
+    background-color: #6B75FE;
+    color: white; /* Optional: to ensure text is readable */
+}
