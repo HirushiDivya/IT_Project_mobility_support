@@ -6,7 +6,6 @@ import './../Styles.css'; // Update the path based on your file structure
 
 export default function ViewShedule() {
   const { id } = useParams();
-
   const [shedule, setShedule] = useState({});
 
   useEffect(() => {
@@ -34,16 +33,15 @@ export default function ViewShedule() {
         {renderDetail("Age", shedule.age)}
         {renderDetail("Phone Number", shedule.phone_number)}
         {renderDetail("Email", shedule.email)}
-        {renderDetail("NIC", shedule.nIC)}
-        {renderDetail("Current Status", shedule.current_Status)}
-        {renderDetail("Current Physical Condition", shedule.current_Physical_Condition)}
-        {renderDetail("Previous Therapy", shedule.previous_Therapy)}
-        {renderDetail("Therapy Goal", shedule.therapy_Goal)}
+        {renderDetail("NIC", shedule.NIC)}
+        {renderDetail("Current Status", shedule.current_status)}
+        {renderDetail("Current Physical Condition", shedule.current_physical_condition)}
+        {renderDetail("Previous Therapy", shedule.previous_therapy)}
+        {renderDetail("Therapy Goal", shedule.therapy_goal)}
         {renderDetail("Date", shedule.date)}
-        {renderDetail("Preferred Time", shedule.preferred_Time)}
+        {renderDetail("Preferred Time", shedule.preferred_time)}
         {renderDetail("Frequency", shedule.frequency)}
         {renderDetail("Location", shedule.location)}
-        {renderDetail("Therapist Preference", shedule.therapist_Preference)}
       </div>
     </div>
   );

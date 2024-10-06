@@ -235,8 +235,8 @@ export default function All_Shedule() {
                                     <button onClick={() => handleDelete(shedule._id)}>Delete</button>
                                 </td>
                             </tr>
-                        ))
-                    ) : (
+                        )) 
+                    ) : ( 
                         <tr>
                             <td colSpan="15">No therapy sessions found</td>
                         </tr>

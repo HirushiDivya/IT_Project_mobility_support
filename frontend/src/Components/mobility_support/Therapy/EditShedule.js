@@ -21,7 +21,7 @@ export default function EditShedule() {
   const [preferred_time, setPreferred_Time] = useState("");
   const [frequency, setFrequency] = useState("");
   const [location, setLocation] = useState("");
-
+  
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -300,3 +300,4 @@ export default function EditShedule() {
     </div>
   );
 }
+

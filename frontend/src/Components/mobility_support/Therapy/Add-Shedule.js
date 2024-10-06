@@ -75,7 +75,7 @@ export default function Add_Shedule() {
         axios.post("http://localhost:3000/shedule/add", newShedule)
             .then(() => {
                 alert("Schedule Added");
-                navigate('/Therapy'); // Navigate to another page after successful submission
+                navigate('/alls'); // Navigate to another page after successful submission
             })
             .catch((err) => {
                 console.error("Error details:", err.response?.data || err.message); // Log error details
