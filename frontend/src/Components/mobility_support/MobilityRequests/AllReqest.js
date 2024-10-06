@@ -12,7 +12,7 @@ export default function AllRequest() {
     const [searchTerm, setSearchTerm] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const navigate = useNavigate();
-
+    
     // Fetching requirements data
     useEffect(() => {
         const getRequirement = async () => {
@@ -88,10 +88,10 @@ export default function AllRequest() {
         navigate(`/rremove/${id}`, { state: { requestId: id } });  // Passing requestId if needed
     };
 
-    // Navigate to EditRequest page
-    const handleEdit = (id) => {
-        navigate(`redit/${id}`);
-    };
+     // Navigate to EditRequest page
+     const handleEdit = (id) => {
+        navigate(`/redit/${id}`); // Navigate to the edit page with the request ID
+    };  
 
     return (
         <div className="container">
@@ -167,15 +167,31 @@ export default function AllRequest() {
                                 <td>{Requirement.requests}</td>
                                 <td>
                                     {/* Edit Request Button */}
-                                    <button onClick={() => handleEdit(Requirement._id)}>Edit</button>
+
+                                    {/* Edit Request Button */}
+                                    <button 
+                                        onClick={() => handleEdit(Requirement._id)}
+                                        style={{
+                                            padding: '0.3rem 0.8rem',
+                                            borderRadius: '5px',
+                                            backgroundColor: '#6B75FE',
+                                            color: 'white',
+                                            border: 'none',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        Edit
+                                    </button>
+
 
                                     {/* Remove Request Button */}
                                     <button 
                                         onClick={() => handleRemoveRequest(Requirement._id)}
+                                        
                                         style={{
                                             padding: '0.3rem 0.8rem',
                                             borderRadius: '5px',
-                                            backgroundColor: '#ff4d4d',
+                                            backgroundColor: '#6B75FE',
                                             color: 'white',
                                             border: 'none',
                                             cursor: 'pointer'
