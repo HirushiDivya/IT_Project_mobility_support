@@ -7,7 +7,7 @@ export default function RemoveRequest() {
     const navigate = useNavigate();
     
     const [request, setrequest] = useState(null);
-  
+
     useEffect(() => {
         axios.get(`http://localhost:3000/request/get/${id}`).then((res) => {
             if (res.data.success) {
@@ -37,7 +37,8 @@ export default function RemoveRequest() {
     if (!request) {
         return <div>Loading...</div>; // Show a loading message while fetching data
     }
-  
+
+
     return (
         <div className="container" style={{ margin: "50px 0px 0px 50px" }}>
             <h2>Request Details</h2>

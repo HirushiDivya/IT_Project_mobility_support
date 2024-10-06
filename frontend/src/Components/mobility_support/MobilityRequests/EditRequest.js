@@ -1,102 +1,110 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function EditRequest() {
-    const location = useLocation();
+    const { id } = useParams();
     const navigate = useNavigate();
-    const { id } = useParams(); // Get the passed request ID
-
-    const [formData, setFormData] = useState({
-        elderId: '',
-        requests: '',
-    });
     
-    const [loading, setLoading] = useState(true); // Track loading state
-    const [error, setError] = useState(''); // Track errors
-    const [success, setSuccess] = useState(false); // Track success
+    const [request, setRequest] = useState({
+        elderId: "",
+        requests: ""
+    });
+    const [error, setError] = useState("");
 
-    // Fetch the request data based on the ID
+    // Fetch request details by ID
     useEffect(() => {
-        const fetchRequest = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3000/request/get/${id}`);
-                if (response.status === 200) {
-                    setFormData(response.data); // Set form data with fetched data
-                    setLoading(false);
+        axios.get(`http://localhost:3000/request/get/${id}`)
+            .then((res) => {
+                if (res.data.success) {
+                    setRequest(res.data.request);
+                } else {
+                    alert("Error fetching request");
                 }
-            } catch (error) {
-                setError("Error fetching the request.");
-                setLoading(false);
-            }
-        };
-
-        fetchRequest();
+            })
+            .catch((err) => {
+                console.error(err);
+                alert("Error fetching request");
+            });
     }, [id]);
 
-    const handleChange = (e) => {
+    // Handle input changes to update form fields
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value,
-        }));
+        setRequest({ ...request, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(''); // Clear any previous errors
-        setSuccess(false); // Reset success state
-
-        try {
-            const response = await axios.put(`http://localhost:3000/request/update/${id}`, formData);
-            if (response.status === 200) {
-                setSuccess(true); // Show success message
-                setTimeout(() => {
-                    navigate('/rall'); // Navigate to AllRequest page after a short delay
-                }, 1500);
-            }
-        } catch (error) {
-            setError('Error updating the request. Please try again.');
+    // Handle update request
+    const handleUpdate = () => {
+        // Frontend validation for empty fields
+        if (!request.elderId || !request.requests) {
+            setError("Elder ID and Request fields cannot be empty");
+            return;
         }
+
+        // Update the request in the backend
+        axios.put(`http://localhost:3000/request/update/${id}`, request)
+            .then((res) => {
+                if (res.data.success) {
+                    navigate("/request"); // Navigate to the list of requests
+                } else {
+                    alert("Error updating request");
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                alert("Error updating request");
+            });
     };
+
+    // If request data is not loaded yet, show a loading message
+    if (!request) {
+        return <div>Loading...</div>;
+    }
 
     return (
-        <div className="container">
-            <h1>Edit Request</h1>
+        <div className="container" style={{ margin: "50px 0px 0px 50px" }}>
+            <h2>Update Request</h2>
+            {error && <div className="alert alert-danger">{error}</div>}
 
-            {loading ? (
-                <p>Loading request data...</p>
-            ) : (
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Elder ID:</label>
-                        <input
-                            type="text"
-                            name="elderId"
-                            value={formData.elderId}
-                            onChange={handleChange}
-                            readOnly // Keep this field read-only
-                        />
-                    </div>
+            {/* Elder ID Field */}
+            <div className="row mb-3">
+                <label className="col-sm-2 col-form-label">Elder ID</label>
+                <div className="col-sm-10">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="elderId"
+                        value={request.elderId}
+                        onChange={handleInputChange}
+                        placeholder="Enter Elder ID"
+                    />
+                </div>
+            </div>
 
-                    <div>
-                        <label>Request:</label>
-                        <input
-                            type="text"
-                            name="requests"
-                            value={formData.requests}
-                            onChange={handleChange}
-                            required // Make this field required
-                        />
-                    </div>
+            {/* Request Field */}
+            <div className="row mb-3">
+                <label className="col-sm-2 col-form-label">Request</label>
+                <div className="col-sm-10">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="requests"
+                        value={request.requests}
+                        onChange={handleInputChange}
+                        placeholder="Enter Request"
+                    />
+                </div>
+            </div>
 
-                    <button type="submit">Update</button>
-
-                    {/* Display error or success messages */}
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
-                    {success && <p style={{ color: 'green' }}>Request updated successfully!</p>}
-                </form>
-            )}
+            {/* Update Button */}
+            <div className="row mb-3">
+                <div className="col-sm-10 offset-sm-2">
+                    <button className="btn btn-primary" onClick={handleUpdate}>
+                        Update
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }

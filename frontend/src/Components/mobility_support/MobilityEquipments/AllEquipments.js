@@ -22,7 +22,7 @@ export default function AllEquipments() {
         };
         getEquipment();
     }, []);
-
+    
     // Function to handle edit button click
     const handleEdit = (id) => {
         navigate(`/eedit/${id}`); // Navigates to the edit page with the equipment ID
@@ -30,9 +30,13 @@ export default function AllEquipments() {
 
     // Function to handle delete button click
     const handleDelete = (id) => {
-        navigate(`/edelete/${id}`);
+        navigate(`/remequip/${id}`); // Navigates to the delete page with the equipment ID
     };
 
+    // Function to handle delete button click
+    /*const handleDelete = (id) => {
+        navigate(`/edelete/${id}`);
+    };*/
 
     return (
         <div>
@@ -56,16 +60,18 @@ export default function AllEquipments() {
                             <td>{Equipment.category}</td>
                             <td>{Equipment.condition}</td>
                             <td>{Equipment.model_number}</td>
-                        
+                    
                             <td>
                                     <button onClick={() => handleEdit(Equipment._id)}>Edit</button>
-                                    <button onClick={() => handleDelete(Equipment._id)}>Delete</button>
+                                    <button onClick={() => handleDelete(Equipment._id)}>Removee</button>
                                 </td>
                             
-                        </tr>
+                        </tr>  
                     ))}
                 </tbody>
             </table>
         </div>
     );
+
 }
+
