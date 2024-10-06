@@ -7,7 +7,7 @@ const equipmentSchema = new Schema({
         type : String,
         required : true
     },
-    
+
     discription : {
         type : String,
         required : true
