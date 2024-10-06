@@ -29,13 +29,36 @@ router.post('/add', (req, res) => {
         .catch((err) => res.status(500).json({ success: false, message: err.message }));
 });
 
-
 // Read all equipments
 // URL: http://localhost:3000/e/
 router.get('/', (req, res) => {
     equipment.find()
         .then((equipments) => res.json(equipments))
         .catch((err) => res.status(500).json({ success: false, message: err.message }));
+});
+
+
+
+// Update equipment
+// URL: http://localhost:3000/e/update/:id
+router.put('/update/:id', async (req, res) => {
+    let userId = req.params.id;
+    const { name,discription,category,condition,model_number}= req.body; 
+
+    const updatedRequest = {
+        name, 
+        discription,
+        category ,
+        condition ,
+        model_number,
+    };
+
+    try {
+        await equipment.findByIdAndUpdate(userId, updatedRequest);
+        res.status(200).json({ success: true, message: "Request updated successfully" });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Error updating request", error: err.message });
+    }
 });
 
 
