@@ -52,7 +52,7 @@ export default function TherapySession() {
     };
     
     const handleDelete = (id) => {
-        navigate(`/Delete/${id}`); // Navigate to the delete page with the ID
+        navigate(`/deletee/${id}`); // Navigate to the delete page with the ID
     };
 
     const handleView = (id) => {
@@ -62,7 +62,7 @@ export default function TherapySession() {
     const generatePDF = () => {
         const doc = new jsPDF();
         doc.setFontSize(22);
-        doc.text('Therapy Sessions Report', 14, 22);
+        //doc.text('Therapy Sessions Report', 14, 22);
         const tableColumns = [
             { header: 'ElderId', dataKey: 'elderId' },
             { header: 'Name', dataKey: 'name' },
@@ -79,6 +79,7 @@ export default function TherapySession() {
             { header: 'Frequency', dataKey: 'frequency' },
             { header: 'Location', dataKey: 'location' }
         ];
+    
         const tableData = filteredShedules.map((shedule) => ({
             elderId: shedule.elderId || '',
             name: shedule.name || '',
@@ -100,12 +101,25 @@ export default function TherapySession() {
             body: tableData,
             startY: 30,
             theme: 'grid',
-            styles: { fontSize: 8, cellPadding: 3 },
-            headStyles: { fontSize: 4, fillColor: [0, 0, 0], textColor: [255, 255, 255] },
+            styles: { fontSize: 8, cellPadding: 1 },
+            headStyles: { fontSize: 6, fillColor: [0, 0, 0], textColor: [255, 255, 255] },
             margin: { top: 25 },
+            pageBreak: 'auto', // Automatically break the page when content overflows
             didDrawPage: (data) => {
-                doc.setFontSize(22);
-                doc.text('Therapy Sessions Report', 14, 22);
+                //header
+                const pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
+                const headerText = 'Therapy Sessions Report';
+                const textWidth = doc.getTextWidth(headerText);
+                const xOffset = (pageWidth - textWidth) / 2; // Calculate the horizontal center position
+
+               doc.setFontSize(22);
+               doc.text(headerText, xOffset, 22); // Set the X position to center the text
+
+
+                // Footer (optional, add page number)
+                const pageCount = doc.internal.getNumberOfPages();
+                doc.setFontSize(10);
+                doc.text(`Page ${data.pageNumber} of ${pageCount}`, data.settings.margin.left, doc.internal.pageSize.height - 10);
             }
         });
         doc.save('therapy_sessions_report.pdf');
@@ -172,25 +186,34 @@ export default function TherapySession() {
             transition: 'background-color 0.3s',
         },
         tableContainer: {
-            width: '80%',
-            margin: '0 auto',
-            padding: '20px',
+            display: 'flex',
+            justifyContent: 'center',  // Center the table
+            width: '100%',  // Ensure the table fits within the viewport
+            padding: '30px',  // Optional padding
+            overflow: 'hidden',  // Prevent any overflow
         },
         table: {
             margin: '0 auto',
             borderCollapse: 'collapse',
-            width: '90%',
+            width: '90%',  // Adjust width as necessary
             border: '1px solid #ddd', // Add outer border
         },
         th: {
             padding: '10px',
             backgroundColor: '#f4f4f4',
             border: '1px solid #ddd', // Add border to header cells
+            fontSize: '15px',  // Smaller font size for headers
         },
         td: {
-            padding: '10px',
-            border: '1px solid #ddd', // Add border to body cells
+            padding: '5px',
+            border: '1px solid #ddd',
+            textAlign: 'center',
+            whiteSpace: 'normal',  // Allows content to wrap onto multiple lines
+            wordBreak: 'break-word',  // Forces long words to break if needed
+            maxWidth: '150px',  // Optional: Sets a maximum width for table cells
+            fontSize: '15px',  // Smaller font size
         }
+       
     };
 
     return (
