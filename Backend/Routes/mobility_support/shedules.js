@@ -72,7 +72,6 @@ router.post('/add', (req, res) => {
 
  });
 
-
 // Read all schedules
 // URL: http://localhost:3000/shedule/
 router.get('/', (req, res) => {
@@ -111,7 +110,7 @@ router.route("/update/:id").put(async (req,res)=>{
   /*  const validation = validateShedule(shedule);
     if (!validation.valid) {
         return res.status(400).json({ success: false, message: validation.message });
-    }*/
+    }*/ 
 
    const update = await Shedule.findByIdAndUpdate(userId, updateshedule)
     .then(()=>{
