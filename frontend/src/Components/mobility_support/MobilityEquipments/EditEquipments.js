@@ -39,7 +39,7 @@ const EditEquipments = () => {
 
         fetchEquipment();
     }, [id]);
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
         try {

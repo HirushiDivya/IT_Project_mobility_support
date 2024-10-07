@@ -77,35 +77,35 @@ export default function ViewShedule() {
       <div className="row mb-3">
         <label className="col-sm-2 col-form-label">NIC</label>
         <div className="col-sm-10">
-          <p className="form-control-plaintext">{shedule.nIC}</p>
+          <p className="form-control-plaintext">{shedule.NIC}</p>
         </div>
       </div>
 
       <div className="row mb-3">
         <label className="col-sm-2 col-form-label">Current Status</label>
         <div className="col-sm-10">
-          <p className="form-control-plaintext">{shedule.current_Status}</p>
+          <p className="form-control-plaintext">{shedule.current_status}</p>
         </div>
       </div>
 
       <div className="row mb-3">
         <label className="col-sm-2 col-form-label">Current Physical Condition</label>
         <div className="col-sm-10">
-          <p className="form-control-plaintext">{shedule.current_Physical_Condition}</p>
+          <p className="form-control-plaintext">{shedule.current_physical_condition}</p>
         </div>
       </div>
 
       <div className="row mb-3">
         <label className="col-sm-2 col-form-label">Previous Therapy</label>
         <div className="col-sm-10">
-          <p className="form-control-plaintext">{shedule.previous_Therapy}</p>
+          <p className="form-control-plaintext">{shedule.previous_therapy}</p>
         </div>
       </div>
 
       <div className="row mb-3">
         <label className="col-sm-2 col-form-label">Therapy Goal</label>
         <div className="col-sm-10">
-          <p className="form-control-plaintext">{shedule.therapy_Goal}</p>
+          <p className="form-control-plaintext">{shedule.therapy_goal}</p>
         </div>
       </div>
 
@@ -119,7 +119,7 @@ export default function ViewShedule() {
       <div className="row mb-3">
         <label className="col-sm-2 col-form-label">Preferred Time</label>
         <div className="col-sm-10">
-          <p className="form-control-plaintext">{shedule.preferred_Time}</p>
+          <p className="form-control-plaintext">{shedule.preffered_time}</p>
         </div>
       </div>
 
@@ -137,13 +137,7 @@ export default function ViewShedule() {
         </div>
       </div>
 
-      <div className="row mb-3">
-        <label className="col-sm-2 col-form-label">Therapist Preference</label>
-        <div className="col-sm-10">
-          <p className="form-control-plaintext">{shedule.therapist_Preference}</p>
-        </div>
-      </div>
-
+      
       <div className="row mb-3">
         <div className="col-sm-10 offset-sm-2">
           <button className="btn btn-danger" onClick={handleDelete}>Delete</button>

@@ -23,11 +23,15 @@ import MobilityReport from './Components/mobility_support/MobilityProgressReport
 import AddEquipments from './Components/mobility_support/MobilityEquipments/AddEquipments';
 import AllEquipments from './Components/mobility_support/MobilityEquipments/AllEquipments';
 import EditEquipments from './Components/mobility_support/MobilityEquipments/EditEquipments';
-import DeleteEquipments from './Components/mobility_support/MobilityEquipments/DeleteEquiipments';
+import Removee from './Components/mobility_support/MobilityEquipments/DeleteEquiipments';
 
 import LogOut from './Components/mobility_support/logout';
 import Profile from './Components/mobility_support/profile';
 import Settings from './Components/mobility_support/settings';
+
+import Elder from './Components/mobility_support/Elder';
+import Overview from './Components/Overview ';
+import ManageProfile from './Components/mobility_support/ManageProfile';
 
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //frontend\src\Components\mobility_support\AddShedule.js
@@ -39,27 +43,36 @@ function App() {
       <Routes>
       <Route path = "/radd" exact element = {<AddRequest />} />
       <Route path = "/rremove/:id" exact element = {<RemoveRequest />} />
-      <Route path = "/redit" exact element = {<EditRequest />} />
+      <Route path = "/redit/:id" exact element = {<EditRequest />} />
       <Route path = "/rviewone/:id" exact element = {<ViewOneRequest />} />
       <Route path = "/rall" exact element = {<AllRequest />} />
       <Route path = "/request" exact element = {<MobilityReqest />} />
+
+        <Route path='/remequip/:id' exact element = {<Removee/>} />
         <Route path = "/allequipments" exact element = {<AllEquipments />} />
         <Route path = "/addequipmnts" exact element = {<AddEquipments />} />
         <Route path = "/report" exact element = {<MobilityReport />}/>
         <Route path = "/equipments" exact element = {<MobilityEquipments />}/>
-        <Route path = "/Delete/:id" exact element = {<Delete />} />
+
+        
+        <Route path = "/deletee/:id" exact element = {<Delete />} />
         <Route path = "/Update" exact element = {<Update />} />
         <Route path = "/" exact element = {<Home/>} />
         <Route path = "/ViewOne/:id" exact element = {<ViewOne />} />
         <Route path = "/EditShedule/:id" exact element = {<EditShedule />} />
         <Route path = "/Home" exact element = {<Home/>} />
+        
+      <Route path="/alls" exact element = {<All_Shedule/>}  />
       <Route path="/Therapy" exact element = {<TherapySession/>} />
       <Route path="/add" exact element ={<Add_Shedule />} />
       <Route path="/settings" exact element ={<Settings />} />
       <Route path="/logout" exact element ={<LogOut />} />
       <Route path="/profile" exact element ={<Profile />} />
       <Route path="/eedit/:id" exact element ={<EditEquipments />} />
-      <Route path="/edelete/:id" exact element ={<DeleteEquipments />} /> 
+
+      <Route path="/Overview/" exact element ={<Overview/>} />
+      <Route path="/elder" exact element ={<Elder/>} />
+      <Route path ="/mngeprof/:id" exact element ={<ManageProfile/>} />
       </Routes>
     </div>
     </Router>

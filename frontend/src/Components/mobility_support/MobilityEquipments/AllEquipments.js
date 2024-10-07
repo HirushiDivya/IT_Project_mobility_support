@@ -23,6 +23,7 @@ export default function AllEquipments() {
         getEquipment();
     }, []);
     
+    
     // Function to handle edit button click
     const handleEdit = (id) => {
         navigate(`/eedit/${id}`); // Navigates to the edit page with the equipment ID
@@ -32,6 +33,7 @@ export default function AllEquipments() {
     const handleDelete = (id) => {
         navigate(`/remequip/${id}`); // Navigates to the delete page with the equipment ID
     };
+    
 
     // Function to handle delete button click
     /*const handleDelete = (id) => {
@@ -62,8 +64,9 @@ export default function AllEquipments() {
                             <td>{Equipment.model_number}</td>
                     
                             <td>
+
                                     <button onClick={() => handleEdit(Equipment._id)}>Edit</button>
-                                    <button onClick={() => handleDelete(Equipment._id)}>Removee</button>
+                                    <button onClick={() => handleDelete(Equipment._id)}>Remove</button>
                                 </td>
                             
                         </tr>  

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { validateElderId, validatePhoneNumber, validateNIC, validateDate, validateTime } from './../Validation/SheduleValidation';
-
 export default function EditShedule() {  
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ export default function EditShedule() {
   const [previous_therapy, setPrevious_therapy] = useState("");
   const [therapy_goal, setTherapy_goal] = useState("");
   const [date, setDate] = useState("");
-  const [preferred_time, setPreferred_Time] = useState("");
+  const [preffered_time, setPreffered_time] = useState("");
   const [frequency, setFrequency] = useState("");
   const [location, setLocation] = useState("");
   
@@ -39,7 +38,7 @@ export default function EditShedule() {
         setPrevious_therapy(shedule.previous_therapy);
         setTherapy_goal(shedule.therapy_goal);
         setDate(shedule.date);
-        setPreferred_Time(shedule.preferred_time);
+        setPreffered_time(shedule.preffered_time);
         setFrequency(shedule.frequency);
         setLocation(shedule.location);
       }
@@ -52,7 +51,7 @@ export default function EditShedule() {
     newErrors.phone_number = validatePhoneNumber(phone_number);
     newErrors.NIC = validateNIC(NIC);
     newErrors.date = validateDate(date);
-    newErrors.preferred_time = validateTime(preferred_time);
+    newErrors.preffered_time = validateTime(preffered_time);
 
     setErrors(newErrors);
     return !Object.values(newErrors).some((error) => error !== null);
@@ -77,7 +76,7 @@ export default function EditShedule() {
       previous_therapy,
       therapy_goal,
       date,
-      preferred_time,
+      preffered_time,
       frequency,
       location,
     };
@@ -85,7 +84,7 @@ export default function EditShedule() {
     axios.put(`http://localhost:3000/shedule/update/${id}`, updatedShedule)
       .then(() => {
         alert("Shedule Updated");
-        navigate("/"); // Adjust this to the desired redirect path
+        navigate("/Therapy"); // Adjust this to the desired redirect path
       })
       .catch((err) => {
         alert(err);
@@ -253,16 +252,16 @@ export default function EditShedule() {
         </div>
 
         <div className="row mb-3">
-          <label htmlFor="preferred_time" className="col-sm-2 col-form-label">Preferred Time</label>
+          <label htmlFor="preffered_time" className="col-sm-2 col-form-label">Preferred Time</label>
           <div className="col-sm-10">
             <input
               type="time"
               className="form-control"
-              id="preferred_time"
-              value={preferred_time}
-              onChange={(e) => setPreferred_Time(e.target.value)}
+              id="preffered_time"
+              value={preffered_time}
+              onChange={(e) => setPreffered_time(e.target.value)}
             />
-            {errors.preferred_Time && <small className="text-danger">{errors.preferred_time}</small>}
+            {errors.preffered_time && <small className="text-danger">{errors.preffered_time}</small>}
           </div>
         </div>
 
