@@ -22,8 +22,14 @@ export const validateDate = (date) => {
 };
 
 export const validateTime = (time) => {
-    const inputTime = new Date(`1970-01-01T${time}:00`);
-    const startTime = new Date('1970-01-01T08:00:00');
-    const endTime = new Date('1970-01-01T20:00:00');
-    return inputTime >= startTime && inputTime <= endTime ? null : 'Time must be between 08:00 and 20:00.';
+    const [hours, minutes] = time.split(':').map(Number);
+    const inputTime = hours * 60 + minutes; // Convert time to minutes for easy comparison
+
+    const startTime = 8 * 60;  // 08:00 in minutes
+    const endTime = 20 * 60;   // 20:00 in minutes
+
+    return inputTime >= startTime && inputTime <= endTime
+        ? null
+        : 'Time must be between 08:00 and 20:00.';
 };
+

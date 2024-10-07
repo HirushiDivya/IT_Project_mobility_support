@@ -39,7 +39,7 @@ export default function ViewShedule() {
         {renderDetail("Previous Therapy", shedule.previous_therapy)}
         {renderDetail("Therapy Goal", shedule.therapy_goal)}
         {renderDetail("Date", shedule.date)}
-        {renderDetail("Preferred Time", shedule.preferred_time)}
+        {renderDetail("Preferred Time", shedule.preffered_time)}
         {renderDetail("Frequency", shedule.frequency)}
         {renderDetail("Location", shedule.location)}
       </div>

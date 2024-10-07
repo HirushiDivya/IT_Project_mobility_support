@@ -17,7 +17,7 @@ export default function Home() {
     };
 
     const handleReportButtonClick = () => {
-        navigate("/report");
+        navigate("/Overview");
     };
 
     // Get current date
@@ -126,7 +126,7 @@ export default function Home() {
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = styles.button.backgroundColor}
                     onClick={handleReportButtonClick}
                 >
-                    Mobility Progress Report
+                    Overview
                 </button>
             </div>
         </div>
